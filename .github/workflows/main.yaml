@@ -1,0 +1,31 @@
+---
+name: main
+
+"on":
+  push:
+    branches: main
+  pull_request:
+    branches: main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build docker image
+        run: make docker
+
+      - name: Lint
+        run: make container-pre-commit
+
+      - name: Build firmware
+        run: make container-build
+
+      - name: Tests
+        run: make container-tests
+
+      - name: Clang-tidy
+        run: make container-clang-tidy
