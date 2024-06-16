@@ -7,13 +7,23 @@ microcontrollers.
 
 ## Setup
 
+### Developer Container
+
 VSCode allows using a container as a full-featured development environment.
 
-This repository [provides](.devcontainer/devcontainer.json) a developer container. The container includes all necessary
-tools, compilers, and VSCode extensions.
+This repository provides a [Docker developer container](.devcontainer/Dockerfile) and its
+[configuration](.devcontainer/devcontainer.json). The container includes all necessary tools, compilers, and VSCode
+extensions.
 
-Refer to the official [Developing inside a Container](https://code.visualstudio.com/docs/devcontainers/containers)
-manual for more details.
+For more information, refer to:
+
+- The [Developing inside a Container](https://code.visualstudio.com/docs/devcontainers/containers) manual for general
+  information.
+- The
+  [Sharing GPG Keys](https://code.visualstudio.com/remote/advancedcontainers/sharing-git-credentials#_sharing-gpg-keys)
+  guide if you want to use [GPG](https://www.gnupg.org/) to sign your commits.
+
+### Makefile
 
 The [Makefile](Makefile) provides two set of commands for managing the project:
 
