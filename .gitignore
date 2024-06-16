@@ -1,0 +1,8 @@
+# Ignore local cache for pre-commit, clangd, etc.
+.cache/
+
+# Ignore the build directory
+build/
+
+# Ignore the compilation database
+compile_commands.json
