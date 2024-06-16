@@ -1,5 +1,7 @@
 # Convey's Game of Life for STM32
 
+![Build Status](https://github.com/kpada/game_of_life/actions/workflows/main.yaml/badge.svg)
+
 This is a simple implementation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) for
 microcontrollers.
 
