@@ -1,0 +1,82 @@
+---
+fail_fast: false
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-added-large-files
+        exclude: ^.*\.svd$
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-yaml
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+        args: ["--fix=auto"]
+      - id: trailing-whitespace
+
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v13.0.0
+    hooks:
+      - id: clang-format
+        files: \.(cpp|hpp)$
+
+  - repo: https://github.com/codespell-project/codespell.git
+    rev: v2.3.0
+    hooks:
+      - id: codespell
+        args: [-w]
+        files: ^.*\.(md|cpp|hpp|sh|yaml|yml)$
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v3.1.0
+    hooks:
+      - id: prettier
+
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.41.0
+    hooks:
+      - id: markdownlint
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.35.1
+    hooks:
+      - id: yamllint
+        args: [-s]
+
+  - repo: https://github.com/jumanjihouse/pre-commit-hooks/
+    rev: 3.0.0
+    hooks:
+      - id: shfmt
+        args:
+          - -i
+          - "2"
+          - -ci
+      - id: shellcheck
+
+  - repo: https://github.com/tcort/markdown-link-check
+    rev: v3.12.2
+    hooks:
+      - id: markdown-link-check
+
+  - repo: https://github.com/cheshirekow/cmake-format-precommit
+    rev: v0.6.13
+    hooks:
+      - id: cmake-format
+
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.7.0
+    hooks:
+      - id: hadolint
+
+  - repo: https://github.com/cpplint/cpplint
+    rev: 1.6.1
+    hooks:
+      - id: cpplint
+        args:
+          - --linelength=120
+          - --filter=+*,-whitespace/braces,-build/c++11,-runtime/references,-legal/copyright,-build/include_subdir,-readability/nolint
+        files: \.cpp$|\.hpp$
