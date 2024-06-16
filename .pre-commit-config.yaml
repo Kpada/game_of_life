@@ -2,6 +2,7 @@
 fail_fast: false
 
 repos:
+  # General hooks for various common checks.
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
     hooks:
@@ -18,36 +19,64 @@ repos:
         args: ["--fix=auto"]
       - id: trailing-whitespace
 
+  # Hooks for formatting C++ code using clang-format.
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: v13.0.0
+    rev: v18.1.6
     hooks:
       - id: clang-format
         files: \.(cpp|hpp)$
 
-  - repo: https://github.com/codespell-project/codespell.git
+  # Linting for C++ code.
+  - repo: https://github.com/cpplint/cpplint
+    rev: 1.6.1
+    hooks:
+      - id: cpplint
+        args:
+          - --linelength=120
+          - --filter=+*,-whitespace/braces,-build/c++11,-runtime/references,-legal/copyright,-build/include_subdir,-readability/nolint
+        files: \.cpp$|\.hpp$
+
+  # Formatting for CMake files.
+  - repo: https://github.com/cheshirekow/cmake-format-precommit
+    rev: v0.6.13
+    hooks:
+      - id: cmake-format
+
+  # Spellcheck for various file types.
+  - repo: https://github.com/codespell-project/codespell
     rev: v2.3.0
     hooks:
       - id: codespell
         args: [-w]
         files: ^.*\.(md|cpp|hpp|sh|yaml|yml)$
 
+  # Hooks for formatting various file types using Prettier.
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v3.1.0
     hooks:
       - id: prettier
 
+  # Linting for Markdown files.
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.41.0
     hooks:
       - id: markdownlint
 
+  # Checks for dead links in Markdown files.
+  - repo: https://github.com/tcort/markdown-link-check
+    rev: v3.12.2
+    hooks:
+      - id: markdown-link-check
+
+  # Linting for YAML files.
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.35.1
     hooks:
       - id: yamllint
         args: [-s]
 
-  - repo: https://github.com/jumanjihouse/pre-commit-hooks/
+  # Shell script formatting and linting.
+  - repo: https://github.com/jumanjihouse/pre-commit-hooks
     rev: 3.0.0
     hooks:
       - id: shfmt
@@ -57,26 +86,8 @@ repos:
           - -ci
       - id: shellcheck
 
-  - repo: https://github.com/tcort/markdown-link-check
-    rev: v3.12.2
-    hooks:
-      - id: markdown-link-check
-
-  - repo: https://github.com/cheshirekow/cmake-format-precommit
-    rev: v0.6.13
-    hooks:
-      - id: cmake-format
-
+  # Linting for Dockerfile.
   - repo: https://github.com/hadolint/hadolint
-    rev: v2.7.0
+    rev: v2.12.0
     hooks:
       - id: hadolint
-
-  - repo: https://github.com/cpplint/cpplint
-    rev: 1.6.1
-    hooks:
-      - id: cpplint
-        args:
-          - --linelength=120
-          - --filter=+*,-whitespace/braces,-build/c++11,-runtime/references,-legal/copyright,-build/include_subdir,-readability/nolint
-        files: \.cpp$|\.hpp$
