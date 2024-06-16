@@ -9,14 +9,17 @@ RUN apt-get update \
     build-essential \
     curl \
     cmake \
-    tar \
     ca-certificates \
     openssh-client \
     bash-completion \
     git \
+    gnupg2 \
     g++ \
     python3 \
     python3-pip \
+    nano \
+    unzip \
+    tar \
     && rm -rf /var/lib/apt/lists/*
 
 # add a custom user
@@ -57,15 +60,9 @@ RUN apt-get update \
     && git submodule update --init --recursive \
     && ./bootstrap \
     && ./configure \
-    && make \
+    && make "-j$(nproc)" \
     && make install \
     && rm -rf openocd
-
-# hadolint ignore=DL3008
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-    unzip \
-    && rm -rf /var/lib/apt/lists/*
 
 # Download and unzip clangd.
 ARG CLANGD_VERSION=18.1.3
@@ -74,33 +71,14 @@ RUN curl -sLO "https://github.com/clangd/clangd/releases/download/${CLANGD_VERSI
     && unzip clangd-linux-${CLANGD_VERSION}.zip -d /usr/local/ \
     && rm clangd-linux-${CLANGD_VERSION}.zip
 
-# Linters.
-ARG PRECOMMIT_VERSION=3.5.0
-ARG CLANG_FORMAT_VERSION=17.0.6
-ARG CLANG_TIDY_VERSION=17.0.1
-ARG SHFMT_VERSION=3.7.0.1
-ARG CPPLINT_VERSION=1.6.1
-ARG SHELLCHECK_VERSION=0.10.0.1
-RUN pip install --no-cache-dir \
-    pre-commit==${PRECOMMIT_VERSION} \
-    clang-format==${CLANG_FORMAT_VERSION} \
-    clang-tidy==${CLANG_TIDY_VERSION} \
-    shfmt-py==${SHFMT_VERSION} \
-    shellcheck-py==${SHELLCHECK_VERSION} \
-    cpplint==${CPPLINT_VERSION}
-
 # Linter: Hadolint (Docker)
-ARG HADOLINT_VERSION=v2.8.0
-RUN curl -sL "https://github.com/hadolint/hadolint/releases/download/${HADOLINT_VERSION}/hadolint-Linux-$(uname -m)" -o /usr/local/bin/hadolint  \
+ARG HADOLINT_VERSION=v2.12.0
+RUN curl -sL "https://github.com/hadolint/hadolint/releases/download/${HADOLINT_VERSION}/hadolint-Linux-x86_64" -o /usr/local/bin/hadolint  \
     && chmod +x /usr/local/bin/hadolint
 
-# hadolint ignore=DL3008
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-    unzip \
-    gpg \
-    && rm -rf /var/lib/apt/lists/*
+# Install Python packages
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt && rm /tmp/requirements.txt
 
 USER $USERNAME
-
 WORKDIR /data

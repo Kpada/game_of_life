@@ -1,7 +1,8 @@
 {
   "name": "ARM-STM32",
   "build": {
-    "dockerfile": "Dockerfile"
+    "dockerfile": "Dockerfile",
+    "context": ".."
   },
   "runArgs": [
     "--rm",
