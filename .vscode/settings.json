@@ -1,0 +1,79 @@
+{
+  // Hardware debugger
+  "cortex-debug.armToolchainPath": "/usr/bin",
+  "cortex-debug.openocdPath": "/usr/local/bin/openocd",
+  "cortex-debug.gdbPath": "/usr/bin/gdb-multiarch",
+
+  // Formatting
+  "prettier.proseWrap": "always",
+  "editor.formatOnSave": true,
+  "[cpp]": {
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+  },
+  "[c]": {
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
+
+  // Spelling
+  "cSpell.words": [
+    "altfn",
+    "azuretools",
+    "bugprone",
+    "busid",
+    "clangd",
+    "codespell",
+    "Constexpr",
+    "cppcoreguidelines",
+    "devcontainer",
+    "eamodio",
+    "esbenp",
+    "foxundermoon",
+    "gpio",
+    "gpioa",
+    "gpiob",
+    "gpioc",
+    "hadolint",
+    "libopencm3",
+    "linelength",
+    "markdownlint",
+    "marus",
+    "microcontroller",
+    "microcontrollers",
+    "nodiscard",
+    "nolint",
+    "oled",
+    "opendrain",
+    "periph",
+    "shardulm",
+    "shellcheck",
+    "shfmt",
+    "smpr",
+    "subdir",
+    "swappable",
+    "tparam",
+    "trise",
+    "twxs",
+    "udev",
+    "usbipd",
+    "vadimcn"
+  ],
+  "cSpell.caseSensitive": false
+}
