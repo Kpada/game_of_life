@@ -69,7 +69,7 @@ docker:
 # Run the container and execute an optional command.
 # For example: make container CMD="make build"
 .PHONY: container
-container: image
+container: docker
 	eval docker run --rm $(DOCKER_RUN_ARGS) -v $$PWD:/data $(IMAGE) $(CMD)
 
 # Specifies command aliases to be run from the Docker container.
@@ -79,4 +79,4 @@ RUN_TARGETS = build clean tests flash pre-commit clang-tidy
 .PHONY: $(RUN_TARGETS) $(addprefix container-, $(RUN_TARGETS))
 
 $(addprefix container-, $(RUN_TARGETS)):
-	@$(MAKE) run CMD="make $(subst container-,,$@)"
+	@$(MAKE) container CMD="make $(subst container-,,$@)"
