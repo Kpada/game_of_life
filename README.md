@@ -5,15 +5,20 @@
 This is a simple implementation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) for
 microcontrollers.
 
+It also sets up a comprehensive development environment in VSCode, which includes a Docker-based container with all
+necessary tools, compilers, and extensions. This Setup can be used as a reference for similar projects, providing a
+fully-featured development environment for efficient and streamlined development. For more details on setting up the
+development environment, see the [Setup](#setup) section.
+
 ## Setup
 
-### Developer Container
+### Development Container
 
 VSCode allows using a container as a full-featured development environment.
 
-This repository provides a [Docker developer container](.devcontainer/Dockerfile) and its
+This repository provides a [Docker development container](.devcontainer/Dockerfile) and its
 [configuration](.devcontainer/devcontainer.json). The container includes all necessary tools, compilers, and VSCode
-extensions.
+extensions for the entire development cycle.
 
 For more information, refer to:
 
@@ -27,7 +32,7 @@ For more information, refer to:
 
 The [Makefile](Makefile) provides two set of commands for managing the project:
 
-- **From the Developer Container**: These are the primary commands used for development. They assume that you are
+- **From the Development Container**: These are the primary commands used for development. They assume that you are
   working within the container, which contains all the necessary tools and environment configurations.
 
   For example, to build the project:
@@ -38,7 +43,7 @@ The [Makefile](Makefile) provides two set of commands for managing the project:
 
   This command builds the project within the container environment.
 
-- **From the Host Machine**: These commands are useful for quick checks or integrating with CI/CD pipelines. They run
+- **From the Host Machine**: These commands are useful for quick checks or integration with CI/CD pipelines. They run
   the specified tasks within the Docker container and then exit.
 
   For example, to build the project from the host machine:
@@ -126,7 +131,7 @@ Unit tests are located in the `tests` directory. Use the following commands to r
 ## Linting and Static Analysis
 
 The project uses [pre-commit](https://pre-commit.com/) to enforce coding style and check for common errors. The full
-list of checks can be found in the [pre-commit config file](.pre-commit-config.yaml).
+list of checks can be found in the [.pre-commit-config.yaml](.pre-commit-config.yaml) config file.
 
 The pre-commit hooks can be run with the following command:
 
@@ -143,7 +148,10 @@ The pre-commit hooks can be run with the following command:
   ```
 
 The project also uses [clang-tidy](https://clang.llvm.org/extra/clang-tidy.html), which is moved out of the pre-commit
-hook. It can be run with the following command:
+hook. The [.clang-tidy](.clang-tidy) configuration file contains some basic checks and also enforces the
+[Google C++ Style: Naming](https://google.github.io/styleguide/cppguide.html#Naming) conventions.
+
+It can be run with the following command:
 
 - From the development container:
 
