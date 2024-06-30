@@ -3,7 +3,7 @@
 
 #include <array>
 #include <cstdint>
-#include <cstdlib>
+#include <random>
 
 /// @brief Manages the Conway's Game of Life logic.
 /// @tparam Width The width of the game grid.
@@ -55,10 +55,12 @@ class GameOfLife {
   /// @brief Initializes the game grid with a random pattern.
   /// @param seed Seed for the random number generator.
   void InitializeGameGrid(std::uint32_t seed) noexcept {
-    std::srand(seed);
+    std::mt19937 generator(seed);
+    std::uniform_int_distribution<std::uint8_t> distribution(0, 1);
+
     for (auto& row : gameGrid_) {
       for (auto& cell : row) {
-        cell = std::rand() % 2;
+        cell = distribution(generator);
       }
     }
   }
