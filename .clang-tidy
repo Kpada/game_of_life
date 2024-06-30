@@ -8,6 +8,7 @@ Checks: "\
   -*,\
   bugprone*,\
   -bugprone-easily-swappable-parameters,\
+  cert-*,\
   cppcoreguidelines*,\
   -cppcoreguidelines-pro-bounds-constant-array-index,\
   fuchsia-*,\
@@ -20,7 +21,7 @@ Checks: "\
   readability-*,\
   llvm-*,\
   -llvm-header-guard,\
-  misc*,\
+  misc-*,\
   -misc-include-cleaner*,\
   -misc-header-include-cycle*,\
   "
